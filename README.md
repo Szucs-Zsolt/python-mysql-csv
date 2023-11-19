@@ -1,112 +1,109 @@
-## MySQL adatbázisban lévő táblák tartalmának lementése csv formában
+## Conversion of MySQL database tables into csv files
 
-A program miután kapcsolódott az adatbázishoz megjeleníti az abban lévő táblákat.
-Ki lehet választani, hogy ezekből melyikeket írja ki csv formában.
-Minden kiválaszott táblát azonos nevű csv fájlként ír ki a munkakönyvtárba.
+After the programm connected to the database it will show its tables.
+The user can select which one of them should be saved in csv format.
+Each table will be written into a csv file using its own name.
 
-# A telepítés lépései
-1. A helyi gépre tükrözzük a repository-t.
+# Installation
+1. Cloning GitHub repository 
 ```
-git clone https://github.com/Szucs-Zsolt/teszt-hun.git
+git clone https://github.com/Szucs-Zsolt/teszt-eng.git
 ```
 
-2. Kialakítjuk a futtatásához szükséges virtuális környezetet. 
-- a program Python 3.9 verzióját használja 
-- a telepítendő modulok a requirements.txt fájlban vannak.
-(mysql-connector-python==8.2.0, numpy==1.26.2, Pillow==10.1.0, protobuf==4.21.12, six==1.16.0, wxPython==4.2.1)
+2. Creating the virtual environment
+- the program uses Python 3.9 
+- the list of the necessary modules is in the requirements.txt file. (mysql-connector-python==8.2.0, numpy==1.26.2, Pillow==10.1.0, protobuf==4.21.12, six==1.16.0, wxPython==4.2.1)
 ```
-    cd teszt-hun
+    cd teszt-eng
     py -3.9 -m venv venv
     .\venv\Scripts\activate
     python -m pip install -r requirements.txt	
 ```
 
-3. Az adatbázishoz való kapcsolódáshoz szükséges adatok a .\config\mysql_connection.cfg fájlba kerülnek. A szükséges adatok:
-- Első sor    : szerver IP címe
-- Második sor : az adatbázis neve, amihez kapcsolódni szeretnénk
-- Harmadik sor: a felhasználó neve
-- Negyedik sor: a felhasználó jelszava
+3. In the .\config\mysql_connection.cfg are the necessary date to connect to the database. These are:
+- First line: server IP
+- Second line: name of the database 
+- Third line: name of the user
+- Fourth line: password
 
-Példa a .\config\mysql_connection.cfg fájl tartalmára
+Example:
 ```
 192.168.0.120
-adatbazis_neve
-user_neve
-jelszo
+name_of_the_database
+name_of_the_user
+password
 ```
-4. A program elindítása után azonnal csatlakozik az adatbázishoz, megjeleníti az elérhető táblákat.
+4. After started the program connects to the database and show its tables.
 ```
     python main.py
 ```
-- Az első oszlop pipálható, itt lehet kiválasztani, hogy melyik táblát kívánjuk lementeni csv formában.
-- A második oszlopban látható a tábla neve.
-- A lementéshez szükséges gomb az ablak alján van, és a megrendelő írásbeli kérésének megfelelően a 'Save' felirattal rendelkezik.
-- A lementett csv fájlok a program munkakönyvtárába kerülnek. Egy tábla tartalma egy CSV fájlba kerül, a fájl neve a tábla neve, CSV kiterjesztéssel.
+- You can use the first column to mark the table you want to save as a csv file.
+- In the second column is the name of the table.
+- The Save button is at the top of the window.
+- The content of each of the selected tables will be saved in a csv file with the same name.
 
 
-## A program fejlesztése során használt szerver jellemzői: 
-----------------------------------------------------------
+## MySQL server used during the development process
+---------------------------------------------------
 - Debian: debian 6.1.0-12-amd64
 - MySQL/MariaDB: mariadb  Ver 15.1 Distrib 10.11.4-MariaDB
 
-5) Az adatbázis létrehozása során használt parancsok
-----------------------------------------------------
+5) Commands used to create the database in the server
+-----------------------------------------------------
 ```
     sudo apt update
     sudo apt install mariadb-server
 
     sudo mysql -u root -p
 	
-    CREATE DATABASE teszt;
+    CREATE DATABASE test;
     SHOW DATABASES;
-    CREATE TABLE teszt.alkalmazott (
-        alkalmazott_id  INTEGER  PRIMARY KEY  AUTO_INCREMENT,
- 	nev VARCHAR(80),
-	kor INTEGER
+    CREATE TABLE test.employee (
+        employee_id  INTEGER  PRIMARY KEY  AUTO_INCREMENT,
+ 	name VARCHAR(80),
+	age INTEGER
     );
-    USE teszt;
+    USE test;
     SHOW TABLES;
-    DESC teszt.alkalmazott;
+    DESC test.employee;
 	
-    INSERT INTO teszt.alkalmazott (nev, kor) VALUES ("Kovács János", 30);
-    INSERT INTO teszt.alkalmazott (nev, kor) VALUES ("Gipsz Jakab", 31);
-    SELECT * FROM teszt.alkalmazott;
+    INSERT INTO test.employee (nev, kor) VALUES ("John Smith", 30);
+    INSERT INTO test.employee (nev, kor) VALUES ("John Doe", 31);
+    SELECT * FROM test.employee;
 
-    CREATE TABLE teszt.gyumolcs (
-        gyumolcs_id INTEGER  PRIMARY KEY  AUTO_INCREMENT,
-	nev VARCHAR(60),
-	mennyiseg INTEGER);
-    INSERT INTO teszt.gyumolcs (nev, mennyiseg) values ("alma", 1);
-    INSERT INTO teszt.gyumolcs (nev, mennyiseg) values ("barack", 2);
-    INSERT INTO teszt.gyumolcs (nev, mennyiseg) values ("citrom", 3);
-    INSERT INTO teszt.gyumolcs (nev, mennyiseg) values ("dió", 4);
-    INSERT INTO teszt.gyumolcs (nev, mennyiseg) values ("eper", 5);
-    SELECT *  FROM teszt.gyumolcs;
+    CREATE TABLE teszt.fruits (
+        fruit_id INTEGER  PRIMARY KEY  AUTO_INCREMENT,
+	name VARCHAR(60),
+	amount INTEGER);
+    INSERT INTO teszt.fruits (nev, mennyiseg) values ("apple", 1);
+    INSERT INTO teszt.fruits (nev, mennyiseg) values ("banana", 2);
+    INSERT INTO teszt.fruits (nev, mennyiseg) values ("chestnuts", 3);
+    SELECT *  FROM teszt.fruits;
 ```
-6) Felhasználó létrehozása (csak olvasási jogot kap a teszt adatbázis összes táblájára)
----------------------------------------------------------------------------------------
+6) Creating user with read-only rights
+--------------------------------------
 
-    CREATE USER 'teszt_user'@'%'   IDENTIFIED BY 'teszt_jelszó';
+    CREATE USER 'test_user'@'%'   IDENTIFIED BY 'test_password';
 
     SELECT user,host FROM mysql.user;
 
-    GRANT SELECT ON teszt.*   TO 'teszt_user'@'%'
-    SHOW GRANTS FOR 'teszt_user'@'%';
+    GRANT SELECT ON test.*   TO 'test_user'@'%'
+    SHOW GRANTS FOR 'test_user'@'%';
 
     EXIT;	
 
 
-7) A szerver konfigurációját megváltoztattuk (Alapesetben csak localhost-ról engedne belépni.)
-----------------------------------------------------------------------------------------------
+7) The server configuration was change (as a default only localhost can use it)
+-------------------------------------------------------------------------------
 ```
     sudo vim /etc/mysql/my.cnf
         [mysqld]
             bind-address = 0.0.0.0
 ```
 
-Szerver újraindítása:
+Restart
 ```
     sudo systemctl restart mariadb
 ```
 
-Mivel ez a konfiguráció ezután mindenhonnan engedélyezi az adatbázis elérését, ezért feltételezzük, hogy a bejövő kapcsolatokat más módon már szűrtük IP címre / MAC addressre.
+This configuration allows the database to be used from everywhere, so it is strongly advised to check all incoming connection for IP or MAC address.
