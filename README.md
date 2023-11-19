@@ -71,14 +71,14 @@ password
     INSERT INTO test.employee (nev, kor) VALUES ("John Doe", 31);
     SELECT * FROM test.employee;
 
-    CREATE TABLE teszt.fruits (
+    CREATE TABLE test.fruits (
         fruit_id INTEGER  PRIMARY KEY  AUTO_INCREMENT,
 	name VARCHAR(60),
 	amount INTEGER);
-    INSERT INTO teszt.fruits (nev, mennyiseg) values ("apple", 1);
-    INSERT INTO teszt.fruits (nev, mennyiseg) values ("banana", 2);
-    INSERT INTO teszt.fruits (nev, mennyiseg) values ("chestnuts", 3);
-    SELECT *  FROM teszt.fruits;
+    INSERT INTO test.fruits (nev, mennyiseg) values ("apple", 1);
+    INSERT INTO test.fruits (nev, mennyiseg) values ("banana", 2);
+    INSERT INTO test.fruits (nev, mennyiseg) values ("chestnuts", 3);
+    SELECT *  FROM test.fruits;
 ```
 6) Creating user with read-only rights
 --------------------------------------
