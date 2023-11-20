@@ -13,5 +13,6 @@ def csv_writer(file_name, rows):
             writer = csv.writer(f)
             for sor in rows:
                 writer.writerow(sor)
+            return True
     except Exception as e:
-        print("Error:", e)
+        return False

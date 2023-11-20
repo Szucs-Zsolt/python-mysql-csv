@@ -90,14 +90,26 @@ class MainWindow(wx.Frame):
         It reads the content all of the marked tables and write 
         it out each of them in a separate csv file.
         """
+        success = True
         for i in range(self.table.GetNumberRows()):
             # Conversion based of the marked rows 
             if (self.table.GetCellValue(i,0)=="1"):
                 table_name = self.table.GetCellValue(i,1)
                 rows =  self.db.get_all_rows(table_name)
-                csv_writer(file_name=table_name+".csv", rows=rows)
-                self.table.SetCellValue(i,0,"")
+                if rows is None:
+                    self.message_error("I wasn't able to read the content of the tables.", "Error")
+                    return
+
+                table_written = csv_writer(file_name=table_name+".csv", rows=rows)
+                if table_written:
+                    self.table.SetCellValue(i,0,"")
               
+                success = success and table_written
+        if success:
+            self.message_ok("Marked tables has been written as csv", "OK")
+        else:
+            self.message_error("I wasn't able to save the table's content as csv.", "Error")
+
 
     def table_clicked_handler(self, event):
         """
@@ -111,3 +123,18 @@ class MainWindow(wx.Frame):
                 self.table.SetCellValue(row, col, "")
             else:
                 self.table.SetCellValue(row, col, "1")
+
+
+    def message_error(self, msg, title):
+        """
+        Dialog box with error message.
+        """
+        wx.MessageBox(msg, title, wx.OK | wx.ICON_ERROR)
+
+
+    def message_ok(self, msg, title):
+        """
+        Dialog box with info message.
+        """
+        wx.MessageBox(msg, title, wx.OK | wx.ICON_INFORMATION)
+

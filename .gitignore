@@ -321,4 +321,4 @@ pip-selfcheck.json
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,virtualenv
 
 ### A tesztelés során létrehozott .csv file-ok sem kellenek a repóba
-.csv
+*.csv
