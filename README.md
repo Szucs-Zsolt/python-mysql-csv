@@ -14,10 +14,10 @@ git clone https://github.com/Szucs-Zsolt/teszt-eng.git
 - the program uses Python 3.9 
 - the list of the necessary modules is in the requirements.txt file. (mysql-connector-python==8.2.0, numpy==1.26.2, Pillow==10.1.0, protobuf==4.21.12, six==1.16.0, wxPython==4.2.1)
 ```
-    cd teszt-eng
-    py -3.9 -m venv venv
-    .\venv\Scripts\activate
-    python -m pip install -r requirements.txt	
+cd teszt-eng
+py -3.9 -m venv venv
+.\venv\Scripts\activate
+python -m pip install -r requirements.txt
 ```
 
 3. In the .\config\mysql_connection.cfg are the necessary date to connect to the database. These are:
@@ -35,7 +35,7 @@ password
 ```
 4. After started the program connects to the database and show its tables.
 ```
-    python main.py
+python main.py
 ```
 - You can use the first column to mark the table you want to save as a csv file.
 - In the second column is the name of the table.
