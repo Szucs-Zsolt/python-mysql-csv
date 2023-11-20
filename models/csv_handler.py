@@ -1,9 +1,10 @@
 import csv
 
+
 def csv_writer(file_name, rows):
     """
     It will write out the rows in the file, using csv format.
-    
+
     Parameter
         file_name: it will overwrite this file
         rows: it will write out these rows (list of strings)
