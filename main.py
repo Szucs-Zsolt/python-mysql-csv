@@ -10,7 +10,10 @@ from models.csv_handler import csv_writer
 from views.main_window import MainWindow
 
 def main():
-    # It uses a config file to get the necessary data for the connection.
+    """
+    It initializes the database handler with the necessary 
+    data from the config file, then the application starts.
+    """  
     db = Database(config_file=".\\config\\mysql_connection.cfg")
 
     app = wx.App()
