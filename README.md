@@ -93,7 +93,7 @@ python main.py
     EXIT;	
 
 
-7) The server configuration was change (as a default only localhost can use it)
+7) The server configuration has beeen changed (as a default only localhost can use it)
 -------------------------------------------------------------------------------
 ```
     sudo vim /etc/mysql/my.cnf
