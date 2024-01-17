@@ -1,8 +1,10 @@
 """
-A program csatlakozik egy adatbázishoz. Az ehhez szükséges
-adatokat a konfigurációs fájljából veszi.
-Ezután kiírja a táblák nevét, amik kijelölhetők.
-A kijelölt táblák tartalmát csv fájlokba menti.
+The program connects to a database using its
+configuration file: ./config/mysql_connection.cfg
+It will show the name of the tables from the
+database.
+The content of the selected tables will be written
+in csv files.
 """
 import wx
 from models.database import Database
