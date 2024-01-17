@@ -2,7 +2,7 @@
 
 After the program connected to the database it will show its tables.
 The user can select which one of them should be saved in csv format.
-Each table will be written into a csv file using its own name.
+Each table will be written into a separate csv file using the name of the table.
 
 # Installation
 1. Cloning GitHub repository 
@@ -20,7 +20,7 @@ py -3.9 -m venv venv
 python -m pip install -r requirements.txt
 ```
 
-3. In the .\config\mysql_connection.cfg are the necessary date to connect to the database. These are:
+3. In the .\config\mysql_connection.cfg are the necessary data to connect to the database. These are:
 - First line: server IP
 - Second line: name of the database 
 - Third line: name of the user
@@ -33,14 +33,14 @@ name_of_the_database
 name_of_the_user
 password
 ```
-4. After started the program connects to the database and show its tables.
+4. When you start the program it connects to the database and show its tables.
 ```
 python main.py
 ```
 - You can use the first column to mark the table you want to save as a csv file.
 - In the second column is the name of the table.
 - The Save button is at the top of the window.
-- The content of each of the selected tables will be saved in a csv file with the same name.
+- The content of each of the selected tables will be saved into separate files, like: name_of_the_table.csv
 
 
 ## MySQL server used during the development process
@@ -67,17 +67,17 @@ python main.py
     SHOW TABLES;
     DESC test.employee;
 	
-    INSERT INTO test.employee (nev, kor) VALUES ("John Smith", 30);
-    INSERT INTO test.employee (nev, kor) VALUES ("John Doe", 31);
+    INSERT INTO test.employee (name, age) VALUES ("John Smith", 30);
+    INSERT INTO test.employee (name, age) VALUES ("John Doe", 31);
     SELECT * FROM test.employee;
 
     CREATE TABLE test.fruits (
         fruit_id INTEGER  PRIMARY KEY  AUTO_INCREMENT,
 	name VARCHAR(60),
 	amount INTEGER);
-    INSERT INTO test.fruits (nev, mennyiseg) values ("apple", 1);
-    INSERT INTO test.fruits (nev, mennyiseg) values ("banana", 2);
-    INSERT INTO test.fruits (nev, mennyiseg) values ("chestnuts", 3);
+    INSERT INTO test.fruits (name, amount) values ("apple", 1);
+    INSERT INTO test.fruits (name, amount) values ("banana", 2);
+    INSERT INTO test.fruits (name, amount) values ("chestnuts", 3);
     SELECT *  FROM test.fruits;
 ```
 6) Creating user with read-only rights
