@@ -1,13 +1,13 @@
 ## Conversion of MySQL database tables into csv files
 
-After the programm connected to the database it will show its tables.
+After the program connected to the database it will show its tables.
 The user can select which one of them should be saved in csv format.
 Each table will be written into a csv file using its own name.
 
 # Installation
 1. Cloning GitHub repository 
 ```
-git clone https://github.com/Szucs-Zsolt/teszt-eng.git
+git clone https://github.com/Szucs-Zsolt/python-mysql-csv.git
 ```
 
 2. Creating the virtual environment
