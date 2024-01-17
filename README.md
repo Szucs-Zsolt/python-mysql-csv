@@ -14,7 +14,7 @@ git clone https://github.com/Szucs-Zsolt/python-mysql-csv.git
 - the program uses Python 3.9 
 - the list of the necessary modules is in the requirements.txt file. (mysql-connector-python==8.2.0, numpy==1.26.2, Pillow==10.1.0, protobuf==4.21.12, six==1.16.0, wxPython==4.2.1)
 ```
-cd teszt-eng
+cd python-mysql-csv
 py -3.9 -m venv venv
 .\venv\Scripts\activate
 python -m pip install -r requirements.txt
